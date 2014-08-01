@@ -1,0 +1,42 @@
+{
+    "name": "uecode/segment-io-php",
+    "description": "A PHP library for reporting events to the Segment.io API",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "segment.io",
+        "segment",
+        "analytics"
+    ],
+    "homepage": "http://segment.io",
+    "authors": [
+        {
+            "name": "Keith Kirk",
+            "email": "kkirk@undergroundelephant.com",
+            "homepage": "http://undergroundelephant.com"
+        }
+    ],
+    "require": {
+        "php":                        "~5.4",
+        "guzzlehttp/guzzle":          "~4.0",
+        "guzzlehttp/guzzle-services": "~0.3",
+        "monolog/monolog":            "~1.7",
+        "symfony/filesystem":         "~2.5",
+        "symfony/console":            "~2.5"
+    },
+    "require-dev": {
+        "mockery/mockery":    "dev-master",
+        "phpunit/phpunit":    "~4.0",
+        "raulfraile/ladybug": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "SegmentIO\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SegmentIO\\Tests\\": "tests/"
+        }
+    }
+}
