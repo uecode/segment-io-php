@@ -64,7 +64,7 @@ class FileParserCommand extends Command
         $temp = sys_get_temp_dir() . sprintf("/segment-io-%s.log", uniqid());
         $filesystem->rename($file, $temp);
 
-        $events = $this->getEvents($filesystem, $temp);
+        $events = $this->getEvents($temp);
         $output->writeln(sprintf("<info>Found %s events in the log to Send</info>", sizeof($events)));
         if (!sizeof($events)) {
             return 0;
