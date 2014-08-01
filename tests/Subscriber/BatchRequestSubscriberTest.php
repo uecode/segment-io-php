@@ -56,7 +56,6 @@ class BatchRequestSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->client);
         unset($this->subscriber);
     }
 
