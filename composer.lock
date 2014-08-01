@@ -4,59 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4aa1f3b9c274d60693a363dc79694696",
+    "hash": "858d60124bd7c93dee68debef213e96a",
     "packages": [
         {
-            "name": "ddtraceweb/monolog-parser",
-            "version": "1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ddtraceweb/monolog-parser.git",
-                "reference": "83ab5f598b4ccc9750b8d1bc675bb029087dae97"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ddtraceweb/monolog-parser/zipball/83ab5f598b4ccc9750b8d1bc675bb029087dae97",
-                "reference": "83ab5f598b4ccc9750b8d1bc675bb029087dae97",
-                "shasum": ""
-            },
-            "require": {
-                "monolog/monolog": "1.*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Dubture": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Robert Gruendler",
-                    "email": "r.gruendler@gmail.com"
-                }
-            ],
-            "description": "A parser for monolog log entries",
-            "time": "2013-11-22 18:33:29"
-        },
-        {
             "name": "guzzlehttp/command",
-            "version": "0.4.0",
+            "version": "0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/command.git",
-                "reference": "a06e799bca01ebddf46757e678ede6cf17147f9e"
+                "reference": "01d96f9344571e73ec1e29d5a305e4bb484cd29a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/command/zipball/a06e799bca01ebddf46757e678ede6cf17147f9e",
-                "reference": "a06e799bca01ebddf46757e678ede6cf17147f9e",
+                "url": "https://api.github.com/repos/guzzle/command/zipball/01d96f9344571e73ec1e29d5a305e4bb484cd29a",
+                "reference": "01d96f9344571e73ec1e29d5a305e4bb484cd29a",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +45,7 @@
                 }
             ],
             "description": "Provides the foundation for building command based web service clients",
-            "time": "2014-04-30 03:48:46"
+            "time": "2014-08-01 17:54:53"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -407,6 +368,55 @@
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
             "time": "2014-07-15 14:15:12"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "v2.5.2",
+            "target-dir": "Symfony/Component/Filesystem",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Filesystem.git",
+                "reference": "c1309b0ee195ad264a4314435bdaecdfacb8ae9c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/c1309b0ee195ad264a4314435bdaecdfacb8ae9c",
+                "reference": "c1309b0ee195ad264a4314435bdaecdfacb8ae9c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-07-09 09:05:48"
         }
     ],
     "packages-dev": [
@@ -1473,55 +1483,6 @@
             "time": "2014-07-09 09:05:48"
         },
         {
-            "name": "symfony/filesystem",
-            "version": "v2.5.2",
-            "target-dir": "Symfony/Component/Filesystem",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "c1309b0ee195ad264a4314435bdaecdfacb8ae9c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/c1309b0ee195ad264a4314435bdaecdfacb8ae9c",
-                "reference": "c1309b0ee195ad264a4314435bdaecdfacb8ae9c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Symfony\\Component\\Filesystem\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Filesystem Component",
-            "homepage": "http://symfony.com",
-            "time": "2014-07-09 09:05:48"
-        },
-        {
             "name": "symfony/finder",
             "version": "v2.5.2",
             "target-dir": "Symfony/Component/Finder",
@@ -1686,9 +1647,9 @@
         "raulfraile/ladybug": 20
     },
     "prefer-stable": false,
-    "platform": [
-
-    ],
+    "platform": {
+        "php": "~5.4"
+    },
     "platform-dev": [
 
     ]
