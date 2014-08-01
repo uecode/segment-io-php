@@ -79,7 +79,7 @@ command:
     ./parse YOUR_WRITE_KEY --file /tmp/segment-io.log
 
 
-### TRACKING HTTP API Documentation
+### Tracking HTTP API Documentation
 Documentation is available for the Tracking HTTP API at [segment.io/docs/tracking-api/](https://segment.io/docs/tracking-api/reference/).
 
 License
