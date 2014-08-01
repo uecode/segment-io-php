@@ -1,7 +1,7 @@
 Segment PHP Client
 ===================
 
-[![Build Status](https://travis-ci.org/uecode/segment-io-php.svg?branch=master)](https://travis-ci.org/uecode/segment-io-php)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/uecode/segment-io-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/uecode/segment-io-php/?branch=master)
+[![Build Status](https://travis-ci.org/uecode/segment-io-php.svg?branch=master)](https://travis-ci.org/uecode/segment-io-php) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/uecode/segment-io-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/uecode/segment-io-php/?branch=master)
 
 This library provides a Web Service Client for the Segment.io HTTP API
 using [Guzzle v4](http://guzzlephp.org).
@@ -12,7 +12,8 @@ use SegmentIO\Client;
 
 $client = new Client(['write_key' => $writeKey]);
 
-// Identify the user
+// Identify the user - assuming, below, that you
+// have a $user object from your database
 $client->identify([
     'userId' => $user->getId(),
     'traits' => [
