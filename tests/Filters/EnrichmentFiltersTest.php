@@ -47,7 +47,7 @@ class EnrichmentFiltersTest extends \PHPUnit_Framework_TestCase
         $context = [
             'library' => [
                 'name'    => 'analytics-php',
-                'version' => EnrichmentFilters::VERSION
+                'version' => \SegmentIO\Client::VERSION
             ]
         ];
 

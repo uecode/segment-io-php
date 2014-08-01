@@ -26,6 +26,11 @@ use SegmentIO\Subscriber\BatchRequestSubscriber;
 class Client extends GuzzleClient
 {
     /**
+     * PHP Client Version
+     */
+    const VERSION = '1.0.0';
+
+    /**
      * Constructor
      *
      * @param array $config

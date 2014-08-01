@@ -10,11 +10,6 @@ namespace SegmentIO\Filters;
 abstract class EnrichmentFilters
 {
     /**
-     * PHP Client Version
-     */
-    const VERSION = '0.0.1';
-
-    /**
      * Generates a UUID v4 as a Message Id
      *
      * @see https://gist.github.com/dahnielson/508447#file-uuid-php-L74
@@ -91,7 +86,7 @@ abstract class EnrichmentFilters
         return array_merge($context, [
             'library' => [
                 'name'    => 'analytics-php',
-                'version' => self::VERSION
+                'version' => \SegmentIO\Client::VERSION
             ]
         ]);
     }
