@@ -86,12 +86,11 @@ class FileParserCommand extends Command
     /**
      * Parses the Log file and returns an array of events to send to Segment.io
      *
-     * @param  Filesystem $filesystem Symfony Filesystem Component
-     * @param  string     $file       The Log File
+     * @param  string $file The log file
      *
      * @return array
      */
-    private function getEvents(Filesystem $filesystem, $file)
+    private function getEvents($file)
     {
         $contents = file_get_contents($file);
         $events   = explode("\n", $contents, -1);

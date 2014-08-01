@@ -4,7 +4,6 @@ namespace SegmentIO;
 
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Collection;
-use GuzzleHttp\Command\Event\PrepareEvent;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Model;

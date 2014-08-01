@@ -4,7 +4,6 @@ namespace SegmentIO\Subscriber;
 
 use GuzzleHttp\Command\Event\PrepareEvent;
 use GuzzleHttp\Command\Event\ProcessEvent;
-use GuzzleHttp\Command\Event\CommandErrorEvent;
 use GuzzleHttp\Command\Model;
 use GuzzleHttp\Event\SubscriberInterface;
 use SegmentIO\Client;
@@ -99,7 +98,6 @@ class BatchRequestSubscriber implements SubscriberInterface
         }
 
         $command = $event->getCommand();
-        $name    = $command->getName();
 
         if (!$command->getOperation()->getData('batching')) {
             return false;
@@ -164,7 +162,6 @@ class BatchRequestSubscriber implements SubscriberInterface
             return false;
         }
 
-        $commands = [];
         $operations = array_chunk($this->queue, $this->batchSize);
         foreach ($operations as $batch) {
             $this->client->import(['batch' => $batch]);

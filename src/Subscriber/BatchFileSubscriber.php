@@ -4,7 +4,6 @@ namespace SegmentIO\Subscriber;
 
 use GuzzleHttp\Command\Event\PrepareEvent;
 use GuzzleHttp\Command\Event\ProcessEvent;
-use GuzzleHttp\Command\Event\CommandErrorEvent;
 use GuzzleHttp\Command\Model;
 use GuzzleHttp\Event\SubscriberInterface;
 use Monolog\Logger;
@@ -66,7 +65,6 @@ class BatchFileSubscriber implements SubscriberInterface
     public function onPrepare(PrepareEvent $event)
     {
         $command = $event->getCommand();
-        $name    = $command->getName();
 
         if (!$command->getOperation()->getData('batching')) {
             return false;
