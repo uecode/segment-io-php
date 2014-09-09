@@ -85,7 +85,7 @@ abstract class EnrichmentFilters
     {
         return array_merge($context, [
             'library' => [
-                'name'    => 'analytics-php',
+                'name'    => 'analytics-php-guzzle',
                 'version' => \SegmentIO\Client::VERSION
             ]
         ]);
