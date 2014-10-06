@@ -1,5 +1,6 @@
 Segment PHP Client
 ===================
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/uecode/segment-io-php?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Build Status](https://travis-ci.org/uecode/segment-io-php.svg?branch=master)](https://travis-ci.org/uecode/segment-io-php) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/uecode/segment-io-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/uecode/segment-io-php/?branch=master)
 
