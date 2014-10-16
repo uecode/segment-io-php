@@ -1,7 +1,10 @@
 Segment PHP Client
 ===================
 
-[![Build Status](https://travis-ci.org/uecode/segment-io-php.svg?branch=master)](https://travis-ci.org/uecode/segment-io-php) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/uecode/segment-io-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/uecode/segment-io-php/?branch=master)
+[![Build Status](https://img.shields.io/travis/uecode/segment-io-php/master.svg?style=flat-square)](https://travis-ci.org/uecode/segment-io-php)
+[![Quality Score](https://img.shields.io/scrutinizer/g/uecode/segment-io-php.svg?style=flat-square)](https://scrutinizer-ci.com/g/uecode/segment-io-php/)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/uecode/segment-io-php.svg?style=flat-square)](https://scrutinizer-ci.com/g/uecode/segment-io-php/)
+[![Total Downloads](http://img.shields.io/packagist/dt/uecode/segment-io-php.svg?style=flat-square)](https://packagist.org/packages/uecode/segment-io-php)
 
 This library provides a Web Service Client for the Segment.io HTTP API
 using [Guzzle v4](http://guzzlephp.org).
