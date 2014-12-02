@@ -77,7 +77,7 @@ class Client extends GuzzleClient
 
         if ($config->get('batching') == 'file') {
             $this->getEmitter()->attach(new BatchFileSubscriber([
-                'log_file' => $config->get('log_file')
+                'filename' => $config->get('log_file')
             ]));
         }
     }
