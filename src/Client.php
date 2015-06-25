@@ -6,7 +6,6 @@ use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Collection;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
 use GuzzleHttp\Command\Guzzle\Description;
-use GuzzleHttp\Command\Model;
 use SegmentIO\Subscriber\BatchFileSubscriber;
 use SegmentIO\Subscriber\BatchRequestSubscriber;
 
@@ -15,20 +14,20 @@ use SegmentIO\Subscriber\BatchRequestSubscriber;
  *
  * @author Keith Kirk <kkirk@undergroundelephant.com>
  *
- * @method Model identify(array $data = [])
- * @method Model alias(array $data = [])
- * @method Model group(array $data = [])
- * @method Model track(array $data = [])
- * @method Model page(array $data = [])
- * @method Model screen(array $data = [])
- * @method Model import(array $data = [])
+ * @method array identify(array $data = [])
+ * @method array alias(array $data = [])
+ * @method array group(array $data = [])
+ * @method array track(array $data = [])
+ * @method array page(array $data = [])
+ * @method array screen(array $data = [])
+ * @method array import(array $data = [])
  */
 class Client extends GuzzleClient
 {
     /**
      * PHP Client Version
      */
-    const VERSION = '1.0.1';
+    const VERSION = '1.1.0';
 
     /**
      * Constructor
@@ -54,7 +53,7 @@ class Client extends GuzzleClient
             __DIR__ . '/Description/segment.io.%s.php', $config->get('version')
         );
 
-        // Allow the Adapater to be set
+        // Allow the Adapter to be set
         $httpConfig = $config->hasKey('adapter') ? ['adapter' => $config->get('adapter')] : [];
 
         // Create the Client
@@ -69,14 +68,14 @@ class Client extends GuzzleClient
         $this->setConfig('defaults/version', $this->getDescription()->getApiVersion());
 
         if ($config->get('batching') == 'request') {
-            $this->getEmitter()->attach(new BatchRequestSubscriber([
+            $this->getEmitter()->attach(new BatchRequestSubscriber($this->getDescription(), [
                 'max_queue_size' => $config->get('max_queue_size'),
                 'batch_size'    => $config->get('batch_size')
             ]));
         }
 
         if ($config->get('batching') == 'file') {
-            $this->getEmitter()->attach(new BatchFileSubscriber([
+            $this->getEmitter()->attach(new BatchFileSubscriber($this->getDescription(), [
                 'filename' => $config->get('log_file')
             ]));
         }

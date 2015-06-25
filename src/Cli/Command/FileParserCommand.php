@@ -2,10 +2,9 @@
 
 namespace SegmentIO\Cli\Command;
 
-use GuzzleHttp\Adapter\MockAdapter;
-use GuzzleHttp\Adapter\TransactionInterface;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
 use SegmentIO\Client;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
@@ -115,17 +114,18 @@ class FileParserCommand extends Command
      */
     private function createClient($key, $debug = false)
     {
-        $parameters = ['write_key' => $key, 'batching' => false];
+        $client = new Client(['write_key' => $key, 'batching' => false]);
 
         if ($debug) {
-            $adapter = new MockAdapter(function (TransactionInterface $trans) {
-                $response = Stream::factory(json_encode(['success' => true]));
+            $stream = Stream::factory(json_encode(['success' => true]));
+            $mock   = new Mock([
+                new Response(200, [], $stream),
+            ]);
 
-                return new Response(200, [], $response);
-            });
-            $parameters['adapter'] = $adapter;
+            $client->getEmitter()->attach($mock);
         }
 
-        return new Client($parameters);
+
+        return $client;
     }
 }

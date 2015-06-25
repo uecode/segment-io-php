@@ -2,9 +2,9 @@
 
 namespace SegmentIO\Subscriber;
 
-use GuzzleHttp\Command\Event\PrepareEvent;
+use GuzzleHttp\Command\Event\PreparedEvent;
 use GuzzleHttp\Command\Event\ProcessEvent;
-use GuzzleHttp\Command\Model;
+use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Event\SubscriberInterface;
 use SegmentIO\Client;
 
@@ -21,6 +21,13 @@ class BatchRequestSubscriber implements SubscriberInterface
      * @var Client
      */
     private $client = null;
+
+    /**
+     * Webservice Description.
+     *
+     * @var DescriptionInterface
+     */
+    private $description;
 
     /**
      * Queue of Operations
@@ -49,9 +56,10 @@ class BatchRequestSubscriber implements SubscriberInterface
     /**
      * Constructor
      *
-     * @param array $options An array of configuration options
+     * @param DescriptionInterface $description
+     * @param array                $options An array of configuration options
      */
-    public function __construct(array $options = [])
+    public function __construct(DescriptionInterface $description, array $options = [])
     {
         if (isset($options['max_queue_size'])) {
             $this->maxQueueSize = $options['max_queue_size'];
@@ -60,6 +68,7 @@ class BatchRequestSubscriber implements SubscriberInterface
         if (isset($options['batch_size'])) {
             $this->batchSize = $options['batch_size'];
         }
+        $this->description = $description;
     }
 
     /**
@@ -81,32 +90,35 @@ class BatchRequestSubscriber implements SubscriberInterface
     public function getEvents()
     {
         return [
-            'prepare' => ['onPrepare', 'last'],
-            'process' => ['onProcess', 'first']
+            'prepared' => ['onPrepared', 'last'],
+            'process'  => ['onProcess', 'first']
         ];
     }
 
     /**
      * Event to add Segment.io Specific data to the Event Messages
      *
-     * @param PrepareEvent $event The PrepareEvent
+     * @param PreparedEvent $event The PreparedEvent
+     *
+     * @return bool
      */
-    public function onPrepare(PrepareEvent $event)
+    public function onPrepared(PreparedEvent $event)
     {
         if (is_null($this->client)) {
             $this->client = $event->getClient();
         }
 
-        $command = $event->getCommand();
+        $command   = $event->getCommand();
+        $operation = $this->description->getOperation($command->getName());
 
-        if (!$command->getOperation()->getData('batching')) {
+        if (!$operation->getData('batching')) {
             return false;
         }
 
         $parameters = json_decode($event->getRequest()->getBody()->getContents(), true);
         $this->enqueue(array_merge($parameters, ['action' => $command->getName()]));
 
-        $event->setResult(new Model(['success' => true, 'batched' => true]));
+        $event->intercept(['success' => true, 'batched' => true]);
 
         return true;
     }
@@ -120,11 +132,16 @@ class BatchRequestSubscriber implements SubscriberInterface
      */
     public function onProcess(ProcessEvent $event)
     {
-        if (!$event->getCommand()->getOperation()->getData('batching')) {
+        $command   = $event->getCommand();
+        $operation = $this->description->getOperation($command->getName());
+
+        if (!$operation->getData('batching')) {
             return false;
         }
 
-        return $event->stopPropagation();
+        $event->stopPropagation();
+
+        return true;
     }
 
     /**

@@ -2,10 +2,9 @@
 
 namespace SegmentIO\Tests\Subscriber;
 
-use GuzzleHttp\Adapter\MockAdapter;
-use GuzzleHttp\Adapter\TransactionInterface;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
 use SegmentIO\Client;
 use SegmentIO\Subscriber\BatchRequestSubscriber;
 
@@ -33,20 +32,23 @@ class BatchRequestSubscriberTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $adapter = new MockAdapter(function (TransactionInterface $trans) {
-            $response = Stream::factory(json_encode(['success' => true]));
-
-            return new Response(200, [], $response);
-        });
+        $stream = Stream::factory(json_encode(['success' => true]));
+        $mock   = new Mock([
+            new Response(200, [], $stream),
+        ]);
 
         $this->client = new Client([
             'write_key'      => 123,
-            'adapter'        => $adapter,
-            'batching'       => 'request',
-            'max_queue_size' => 1
+            'max_queue_size' => 1,
+            'batching'       => 'request'
         ]);
 
-        $this->subscriber = new BatchRequestSubscriber(['max_queue_size' => 1, 'batch_size' => 1]);
+        $this->client->getEmitter()->attach($mock);
+
+        $this->subscriber = new BatchRequestSubscriber(
+            $this->client->getDescription(),
+            ['max_queue_size' => 1, 'batch_size' => 1]
+        );
     }
 
     /**
@@ -71,11 +73,11 @@ class BatchRequestSubscriberTest extends \PHPUnit_Framework_TestCase
     {
         // Test that operations that do not allow 'batching'
         $response = $this->client->import(['batch' => [['event' => 'foo', 'properties' => ['bar' => 'baz']]]]);
-        $this->assertEquals(['success' => true], $response->toArray());
+        $this->assertEquals(['success' => true], $response);
 
         // Test that operations that allow 'batching'
         $response = $this->client->track(['event' => 'foo', 'properties' => ['bar' => 'baz']]);
-        $this->assertEquals(['success' => true, 'batched' => true], $response->toArray());
+        $this->assertEquals(['success' => true, 'batched' => true], $response);
     }
 
     public function testBatchingFlushesQueueAutomatically()

@@ -2,6 +2,8 @@
 
 namespace SegmentIO\Filters;
 
+use SegmentIO\Client;
+
 /**
  * EnrichmentFilters Class
  *
@@ -79,6 +81,8 @@ abstract class EnrichmentFilters
     /**
      * Get the Default Context properties
      *
+     * @param array $context
+     *
      * @return array
      */
     public static function generateDefaultContext(array $context = [])
@@ -86,7 +90,7 @@ abstract class EnrichmentFilters
         return array_merge($context, [
             'library' => [
                 'name'    => 'analytics-php-guzzle',
-                'version' => \SegmentIO\Client::VERSION
+                'version' => Client::VERSION
             ]
         ]);
     }

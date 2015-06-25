@@ -2,10 +2,9 @@
 
 namespace SegmentIO\Tests\Subscriber;
 
-use GuzzleHttp\Adapter\MockAdapter;
-use GuzzleHttp\Adapter\TransactionInterface;
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Stream\Stream;
+use GuzzleHttp\Subscriber\Mock;
 use SegmentIO\Client;
 use SegmentIO\Subscriber\BatchFileSubscriber;
 
@@ -22,37 +21,37 @@ class BatchFileSubscriberTest extends \PHPUnit_Framework_TestCase
     protected $client;
 
     /**
-     * @var BatchRequestSubscriber $subscriber
+     * @var BatchFileSubscriber $subscriber
      */
     protected $subscriber;
 
     /**
      * Setup Method
      *
-     * Creates an instance of BatchRequestSubscriber
+     * Creates an instance of BatchFileSubscriber
      */
     public function setUp()
     {
-        $adapter = new MockAdapter(function (TransactionInterface $trans) {
-            $response = Stream::factory(json_encode(['success' => true]));
-
-            return new Response(200, [], $response);
-        });
+        $stream = Stream::factory(json_encode(['success' => true]));
+        $mock   = new Mock([
+            new Response(200, [], $stream),
+        ]);
 
         $this->client = new Client([
             'write_key'      => 123,
-            'adapter'        => $adapter,
             'max_queue_size' => 1,
             'batching'       => 'file'
         ]);
 
-        $this->subscriber = new BatchFileSubscriber([]);
+        $this->client->getEmitter()->attach($mock);
+
+        $this->subscriber = new BatchFileSubscriber($this->client->getDescription(), []);
     }
 
     /**
      * Tear Down the Test
      *
-     * Used to explicitly test the BatchRequestSubscriber::__destruct() method
+     * Used to explicitly test the BatchFileSubscriber::__destruct() method
      */
     public function tearDown()
     {
@@ -61,8 +60,24 @@ class BatchFileSubscriberTest extends \PHPUnit_Framework_TestCase
             unlink($file);
         }
 
+        $file = sys_get_temp_dir() . "/segment-io-test2.log";
+        if (file_exists($file)) {
+            unlink($file);
+        }
+
         unset($this->client);
         unset($this->subscriber);
+    }
+
+    public function testBatchingRequests()
+    {
+        // Test that operations that do not allow 'batching'
+        $response = $this->client->import(['batch' => [['event' => 'foo', 'properties' => ['bar' => 'baz']]]]);
+        $this->assertEquals(['success' => true], $response);
+
+        // Test that operations that allow 'batching'
+        $response = $this->client->track(['userId' => 123, 'event' => 'foo', 'properties' => ['bar' => 'baz']]);
+        $this->assertEquals(['success' => true, 'batched' => true], $response);
     }
 
     /**
@@ -71,16 +86,26 @@ class BatchFileSubscriberTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $this->assertInstanceOf('SegmentIO\Subscriber\BatchFileSubscriber', $this->subscriber);
+
     }
 
-    public function testBatchingRequests()
+    /**
+     * Tests that the correct log file is used
+     */
+    public function testLogFile()
     {
-        // Test that operations that do not allow 'batching'
-        $response = $this->client->import(['batch' => [['event' => 'foo', 'properties' => ['bar' => 'baz']]]]);
-        $this->assertEquals(['success' => true], $response->toArray());
+        $this->client->track(['userId' => 123, 'event' => 'foo', 'properties' => ['bar' => 'baz']]);
+        $this->assertTrue(file_exists(sys_get_temp_dir() . "/segment-io.log"));
 
-        // Test that operations that allow 'batching'
-        $response = $this->client->track(['userId' => 123, 'event' => 'foo', 'properties' => ['bar' => 'baz']]);
-        $this->assertEquals(['success' => true, 'batched' => true], $response->toArray());
+        $file = sys_get_temp_dir() . "/segment-io-test2.log";
+        $this->client = new Client([
+            'write_key'      => 123,
+            'max_queue_size' => 1,
+            'batching'       => 'file',
+            'log_file'       => sys_get_temp_dir() . "/segment-io-test2.log",
+        ]);
+
+        $this->client->track(['userId' => 123, 'event' => 'foo', 'properties' => ['bar' => 'baz']]);
+        $this->assertTrue(file_exists(sys_get_temp_dir() . "/segment-io-test2.log"));
     }
 }
