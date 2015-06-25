@@ -7,7 +7,7 @@ Segment PHP Client
 [![Total Downloads](http://img.shields.io/packagist/dt/uecode/segment-io-php.svg?style=flat-square)](https://packagist.org/packages/uecode/segment-io-php)
 
 This library provides a Web Service Client for the Segment.io HTTP API
-using [Guzzle v4](http://guzzlephp.org).
+using [Guzzle v5](http://guzzle.readthedocs.org/en/5.3/).
 
 ### Basic Usage
 ```php
@@ -42,7 +42,7 @@ Setting | Property Name | Description
 --- | --- | ---
 API Write Key | `write_key` | The Segment.io API Write Key
 API Version | `version` | The API Version. Used to version the API (default: `v1`)
-Batching | `batching` | A method of batching calls to the API to reduce latency of over the wire requests (supports: `request` or `file`)
+Batching | `batching` | A method of batching calls to the API to reduce latency of over the wire requests (supports: `request` or `file`) - use `false` to disable
 Request Batching: Max Queue Size | `max_queue_size` | When using Request Batching, this is the total amount of Events to queue before flushing
 Request Batching: Batch Size | `batch_size` | When using Request Batching, this is the total amount of Events sent in a single Request
 File Batching: Log File | `log_file` | When using File Batching, this determines what file to log Events to
