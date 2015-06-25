@@ -9,6 +9,16 @@ Segment PHP Client
 This library provides a Web Service Client for the Segment.io HTTP API
 using [Guzzle v5](http://guzzle.readthedocs.org/en/5.3/).
 
+### Installation
+
+Installation
+
+Install the latest version with:
+
+```bash
+$ composer require uecode/segment-io-php ~1.1
+```
+
 ### Basic Usage
 ```php
 use SegmentIO\Client;
@@ -25,7 +35,7 @@ $client->identify([
     ]
 ]);
 
-// Track an event (userId is required)
+// Track an event (userId or anonymousId is required for all events!)
 $client->track([
     'userId' => $user->getId(),
     'event'  => 'Some Event Happened',
