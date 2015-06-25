@@ -25,9 +25,10 @@ $client->identify([
     ]
 ]);
 
-// Track an event
+// Track an event (userId is required)
 $client->track([
-    'event' => 'Some Event Happened',
+    'userId' => $user->getId(),
+    'event'  => 'Some Event Happened',
     'properties' => [
         'foo' => 'bar'
     ]
