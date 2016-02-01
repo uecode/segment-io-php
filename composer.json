@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php":                        "~5.4|~7.0",
+        "php":                        ">=5.4",
         "guzzlehttp/guzzle":          "~5.0",
         "guzzlehttp/guzzle-services": "~0.5",
         "monolog/monolog":            "~1.7",
