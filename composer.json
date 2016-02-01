@@ -25,9 +25,9 @@
         "symfony/console":            "~2.5"
     },
     "require-dev": {
-        "mockery/mockery":    "dev-master",
-        "phpunit/phpunit":    "~4.0",
-        "raulfraile/ladybug": "dev-master"
+        "mockery/mockery":    "~0.9.4",                                         
+        "phpunit/phpunit":    "~4.0",                                           
+        "raulfraile/ladybug": "~1.0.13" 
     },
     "autoload": {
         "psr-4": {
