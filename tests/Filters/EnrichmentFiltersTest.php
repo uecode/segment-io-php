@@ -3,13 +3,14 @@
 namespace SegmentIO\Tests\Filters;
 
 use SegmentIO\Filters\EnrichmentFilters;
+use PHPUnit\Framework\TestCase;
 
 /**
  * EnrichmentFiltersTest Class
  *
  * @author Keith Kirk <kkirk@undergroundelephant.com>
  */
-class EnrichmentFiltersTest extends \PHPUnit_Framework_TestCase
+class EnrichmentFiltersTest extends TestCase
 {
     /**
      * Tests the EnrichmentFilters::generateMessageId() method

@@ -17,17 +17,17 @@
         }
     ],
     "require": {
-        "php":                        "~5.4",
-        "guzzlehttp/guzzle":          "~5.0",
-        "guzzlehttp/guzzle-services": "~0.5",
+        "php":                        ">=5.5",
+        "guzzlehttp/guzzle":          "5.3.1",
+        "guzzlehttp/guzzle-services": "~0.6",
         "monolog/monolog":            "~1.7",
         "symfony/filesystem":         "~2.5",
         "symfony/console":            "~2.5"
     },
     "require-dev": {
-        "mockery/mockery":    "dev-master",
+        "mockery/mockery":    "~0.9.4",
         "phpunit/phpunit":    "~4.0",
-        "raulfraile/ladybug": "dev-master"
+        "raulfraile/ladybug": "~1.0.13"
     },
     "autoload": {
         "psr-4": {

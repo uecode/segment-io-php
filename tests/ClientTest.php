@@ -2,14 +2,16 @@
 
 namespace SegmentIO\Tests;
 
+use Psr\Log\InvalidArgumentException;
 use SegmentIO\Client;
+use PHPUnit\Framework\TestCase;
 
 /**
  * ClientTest Class
  *
  * @author Keith Kirk <kkirk@undergroundelephant.com>
  */
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends TestCase
 {
     /**
      * @var Client $client
@@ -38,6 +40,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      * Testing the Client::loadServiceDescription($filepath, $version) method
      *
      * Should fail on invalid types or file paths
+     *
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Invalid Service Description!
      */
     public function testLoadingServiceDescription()
     {
@@ -48,13 +53,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('GuzzleHttp\Command\Guzzle\Description', $description);
 
         // Test with a valid file and bad response
-        $this->setExpectedException('InvalidArgumentException', 'Invalid Service Description!');
         $this->client->loadServiceDescription(
             __DIR__ . '/Description/invalid.service.description.%s.php', 'v1'
         );
 
         // Test with a invalid file path
-        $this->setExpectedException('InvalidArgumentException', 'Invalid Service Description!');
         $this->client->loadServiceDescription(
             'foo.%.bar', 'v1'
         );
