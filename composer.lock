@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e6e7a0f6399ed0694113a783294d75c",
+    "content-hash": "0a3cfa5f48300ea8a96e599cae9207cb",
     "packages": [
         {
             "name": "guzzlehttp/command",
@@ -485,7 +485,7 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v2.7.2",
+            "version": "v3.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
@@ -2249,7 +2249,7 @@
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0",
+                "php": ">=5.5",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
@@ -2354,7 +2354,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4"
+        "php": "~5.4 || ~7.1"
     },
     "platform-dev": []
 }
