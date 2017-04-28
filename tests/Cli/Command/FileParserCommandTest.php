@@ -42,7 +42,7 @@ class FileParserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException        RuntimeException
-     * @expectedExceptionMessage Not enough arguments.
+     * @expectedExceptionMessage Not enough arguments
      */
     public function testInvalidWriteKey()
     {
