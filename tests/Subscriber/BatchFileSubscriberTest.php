@@ -7,13 +7,14 @@ use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use SegmentIO\Client;
 use SegmentIO\Subscriber\BatchFileSubscriber;
+use PHPUnit\Framework\TestCase;
 
 /**
  * BatchFileSubscriberTest Class
  *
  * @author Keith Kirk <kkirk@undergroundelephant.com>
  */
-class BatchFileSubscriberTest extends \PHPUnit_Framework_TestCase
+class BatchFileSubscriberTest extends TestCase
 {
     /**
      * @var Client $client

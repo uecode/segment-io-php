@@ -7,13 +7,14 @@ use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Subscriber\Mock;
 use SegmentIO\Client;
 use SegmentIO\Subscriber\BatchRequestSubscriber;
+use PHPUnit\Framework\TestCase;
 
 /**
  * BatchRequestSubscriberTest Class
  *
  * @author Keith Kirk <kkirk@undergroundelephant.com>
  */
-class BatchRequestSubscriberTest extends \PHPUnit_Framework_TestCase
+class BatchRequestSubscriberTest extends TestCase
 {
     /**
      * @var Client $client
@@ -88,7 +89,7 @@ class BatchRequestSubscriberTest extends \PHPUnit_Framework_TestCase
         ];
 
         foreach ($events as $event) {
-            $this->client->track($event);
+            $this->assertArraySubset(['success' => true, 'batched' => true], $this->client->track($event));
         }
     }
 }

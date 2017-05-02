@@ -5,17 +5,16 @@ namespace SegmentIO\Tests\Cli;
 use Monolog\Logger;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
-use SegmentIO\Cli\FileParser;
 use SegmentIO\Cli\Command\FileParserCommand;
-use Symfony\Component\Console\Tester\ApplicationTester;
 use Symfony\Component\Console\Tester\CommandTester;
+use PHPUnit\Framework\TestCase;
 
 /**
  * FileParserCommandTest Class
  *
  * @author Keith Kirk <kkirk@undergroundelephant.com>
  */
-class FileParserTest extends \PHPUnit_Framework_TestCase
+class FileParserCommandTest extends TestCase
 {
 
     /**
@@ -42,7 +41,7 @@ class FileParserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException        RuntimeException
-     * @expectedExceptionMessage Not enough arguments.
+     * @expectedExceptionMessage Not enough arguments
      */
     public function testInvalidWriteKey()
     {
